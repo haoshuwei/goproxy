@@ -105,7 +105,7 @@ func isValidateRequest(ctx *ProxyCtx, r *http.Request) bool {
 func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request) {
 
 	ctx := &ProxyCtx{Req: r, Session: atomic.AddInt64(&proxy.sess, 1), Proxy: proxy, certStore: proxy.CertStore}
-	if !isValidateRequest(ctx) {
+	if !isValidateRequest(ctx, r) {
 		panic("request not allow")
 	}
 
