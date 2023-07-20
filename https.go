@@ -99,6 +99,9 @@ var _ halfClosable = (*net.TCPConn)(nil)
 
 func isValidateRequest(ctx *ProxyCtx, r *http.Request) bool {
 	ctx.Logf("isValidateRequest %v", r.URL.Path)
+	ctx.Logf("isValidateRequest %v", r.URL.String())
+	ctx.Logf("isValidateRequest %v", r.URL.Host)
+	ctx.Logf("isValidateRequest %v", r)
 	return true
 }
 
