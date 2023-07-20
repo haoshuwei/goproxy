@@ -97,8 +97,17 @@ type halfClosable interface {
 
 var _ halfClosable = (*net.TCPConn)(nil)
 
+func isValidateRequest(ctx *ProxyCtx) bool {
+	ctx.Logf("isValidateRequest %v", ctx.Req.URL.Path)
+	return true
+}
+
 func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request) {
+
 	ctx := &ProxyCtx{Req: r, Session: atomic.AddInt64(&proxy.sess, 1), Proxy: proxy, certStore: proxy.CertStore}
+	if !isValidateRequest(ctx) {
+		panic("request not allow")
+	}
 
 	hij, ok := w.(http.Hijacker)
 	if !ok {
