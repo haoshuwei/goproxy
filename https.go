@@ -97,8 +97,8 @@ type halfClosable interface {
 
 var _ halfClosable = (*net.TCPConn)(nil)
 
-func isValidateRequest(ctx *ProxyCtx) bool {
-	ctx.Logf("isValidateRequest %v", ctx.Req.URL.Path)
+func isValidateRequest(ctx *ProxyCtx, r *http.Request) bool {
+	ctx.Logf("isValidateRequest %v", r.URL.Path)
 	return true
 }
 
